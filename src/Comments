@@ -1,0 +1,101 @@
+/*
+            //cell0
+            JButton b_cell0 = new JButton();
+            frame.add(b_cell0);
+            b_cell0.setSize(180, 180);
+            b_cell0.setLocation(5, 5);
+
+            //cell1
+            JButton b_cell1 = new JButton();
+            frame.add(b_cell1);
+            b_cell1.setSize(180, 180);
+            b_cell1.setLocation(200, 5);
+
+            //cell2
+            JButton b_cell2 = new JButton();
+            frame.add(b_cell2);
+            b_cell2.setSize(180, 180);
+            b_cell2.setLocation(395, 5);
+
+            //cell3
+            JButton b_cell3 = new JButton();
+            frame.add(b_cell3);
+            b_cell3.setSize(180, 180);
+            b_cell3.setLocation(5, 200);
+
+            //cell4
+            JButton b_cell4 = new JButton();
+            frame.add(b_cell4);
+            b_cell4.setSize(180, 180);
+            b_cell4.setLocation(200, 200);
+
+            //cell5
+            JButton b_cell5 = new JButton();
+            frame.add(b_cell5);
+            b_cell5.setSize(180, 180);
+            b_cell5.setLocation(395, 200);
+
+            //cell6
+            JButton b_cell6 = new JButton();
+            frame.add(b_cell6);
+            b_cell6.setSize(180, 180);
+            b_cell6.setLocation(5, 395);
+
+            //cell7
+            JButton b_cell7 = new JButton();
+            frame.add(b_cell7);
+            b_cell7.setSize(180, 180);
+            b_cell7.setLocation(200, 395);
+
+            //cell8
+            JButton b_cell8 = new JButton();
+            frame.add(b_cell8);
+            b_cell8.setSize(180, 180);
+            b_cell8.setLocation(395, 395);
+
+            allButtons.add(b_cell0);
+            allButtons.add(b_cell1);
+            allButtons.add(b_cell2);
+            allButtons.add(b_cell3);
+            allButtons.add(b_cell4);
+            allButtons.add(b_cell5);
+
+
+            public Move getPlayerMove(Symbol currentPlayer) {
+                    synchronized (lock) {
+                        while (isEmpty0(lastButtonImport)) {
+                            try {
+                                lock.wait();
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                            }
+                        }
+                        int index = 0;
+                        for (int i : lastButtonImport) {
+                            if (i != 0) index = i-1;
+                        }
+                        return new Move(index, currentPlayer);
+                    }
+                }
+
+             private boolean isEmpty0(int[] array) {
+                    boolean flag = true;
+                    for (int i : array) {
+                        if (i != 0) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    return flag;
+                }
+             */
+
+             SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    AI ai = new AI();
+                    Move move = ai.getAIMove(Game.this, currentPlayer, AI.MAX_DEPTH); //UI GETS STUCK
+                    return null;    
+                }
+            };
+            worker.execute();
