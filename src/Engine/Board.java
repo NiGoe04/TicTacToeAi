@@ -1,7 +1,5 @@
 package Engine;
 
-import java.util.Arrays;
-
 public class Board {
     private Mark[] marks = new Mark[9];
 
@@ -10,7 +8,10 @@ public class Board {
     }
 
     public Board(Board board) {
-        this.marks = Arrays.copyOf(board.marks,board.marks.length);
+        // deep copy due to inner mutation in setMarkAt
+        for (int i = 0; i < board.marks.length; i++) {
+            this.marks[i] = new Mark(i, board.marks[i].symbol());
+        }
     }
     private void initialiseBoard() {
         for (int i = 0; i < 9; i++) {
