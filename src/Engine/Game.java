@@ -43,7 +43,9 @@ public class Game implements MoveListener {
     }
 
     public void play(Move move) {
-        if (!board.moveIsPossible(move.index())) return;
+        if (!board.moveIsPossible(move.index())) {
+            throw new IllegalArgumentException("Move is not possible, index: " + move.index()+ " is already "+ board.getMarks()[move.index()].symbol());
+        }
         board.setMarkAt(move.index(), move.symbol());
         ui.updateUI(this.board);
         if (board.gameIsOver()) {
